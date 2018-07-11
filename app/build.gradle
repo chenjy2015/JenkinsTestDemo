@@ -9,13 +9,177 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true   // 解决Dex超出方法数的限制问题
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/rxjava.properties'
+    }
+
+    dataBinding.enabled = true  // Data Binding Library（数据绑定框架）
+
+    dexOptions {
+        javaMaxHeapSize "4g" // 增加java堆内存大小（增加dex操作的堆大小）
+    }
+
+    lintOptions {
+        checkReleaseBuilds false // false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+
+
+    signingConfigs {
+        debugConfig {
+            keyAlias DEBUG_KEY_ALIAS
+            keyPassword DEBUG_KEY_PASSWROD
+            storeFile file(DEBUG_STORE_FILE)
+            storePassword DEBUG_STORE_PASSWORD
+        }
+        releaseConfig {
+            keyAlias RELEASE_KEY_ALIAS
+            keyPassword RELEASE_KEY_PASSWROD
+            storeFile file(RELEASE_STORE_FILE)
+            storePassword RELEASE_STORE_PASSWORD
+        }
+    }
+
+    buildTypes {
+        // 调试环境（测试环境服务器，不带混淆，可打印日志）
+        debug {
+//            manifestPlaceholders = [BAIDU_KEY_VALUE: "BDkrlSp5O2F56GRU8G3t5ZAA1De2VGte",
+//                                    JPUSH_APPKEY   : "c9634d1970593188a67b1e77",
+//                                    JPUSH_PKGNAME  : "com.oxbix.spanlogistics.debug",
+//                                    JPUSH_CHANNEL  : "developer-default" //暂时填写默认值即可.]
+//            ]
+//            buildConfigField "boolean", "isDebug", "true"
+//            resValue "string", "app_name", "测试版"
+            //混淆
+            minifyEnabled false
+            shrinkResources false
+            debuggable true
+
+            //前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明，后一个文件是自己的定义混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard-x5.cfg'
+            signingConfig signingConfigs.debugConfig
+//            applicationIdSuffix '.debug'//区分debug版本的包名，会自动在正式包名后面带上.debug
+        }
+
+        // 发布环境（线上环境服务器，带混淆，不可打印日志）
+        release {
+//            manifestPlaceholders = [BAIDU_KEY_VALUE: "jQR7Yr7COOAKqs3T2GudKeHW1UzgYbqg",
+//                                    JPUSH_APPKEY   : "7db3190162817c50f34df055",
+//                                    JPUSH_PKGNAME  : "com.oxbix.spanlogistics",
+//                                    JPUSH_CHANNEL  : "developer-default" //暂时填写默认值即可.]
+//            ]
+//            buildConfigField "boolean", "isDebug", "false"
+//            resValue "string", "app_name", "正式版"
+
+            //混淆
+            minifyEnabled true
+            shrinkResources true
+
+            //前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明，后一个文件是自己的定义混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard-x5.cfg'
+            signingConfig signingConfigs.releaseConfig
+        }
+
+        // 测试环境（测试支付专用）
+        dev {
+            matchingFallbacks = ['dev', 'preview', 'debug', 'release']
+//            manifestPlaceholders = [BAIDU_KEY_VALUE: "jQR7Yr7COOAKqs3T2GudKeHW1UzgYbqg",
+//                                    JPUSH_APPKEY   : "7db3190162817c50f34df055",
+//                                    JPUSH_PKGNAME  : "com.oxbix.spanlogistics",
+//                                    JPUSH_CHANNEL  : "developer-default" //暂时填写默认值即可.]
+//            ]
+//            buildConfigField "boolean", "isDebug", "true"
+//            resValue "string", "app_name", "开发版"
+            //混淆
+            minifyEnabled true
+            shrinkResources true
+            debuggable true
+
+            //前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明，后一个文件是自己的定义混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard-x5.cfg'
+            signingConfig signingConfigs.releaseConfig
+        }
+
+        // 预览环境（正式环境服务器，不带混淆，可打印日志，因不带混淆可快速编译打包方便开发）
+        previewDev {
+            //关键代码，release， debug为library中已有buildType
+            matchingFallbacks = ['preview', 'debug', 'release']
+//
+//            manifestPlaceholders = [BAIDU_KEY_VALUE: "jQR7Yr7COOAKqs3T2GudKeHW1UzgYbqg",
+//                                    JPUSH_APPKEY   : "7db3190162817c50f34df055",
+//                                    JPUSH_PKGNAME  : "com.oxbix.spanlogistics",
+//                                    JPUSH_CHANNEL  : "developer-default" //暂时填写默认值即可.]
+//            ]
+//            buildConfigField "boolean", "isDebug", "true"
+//            resValue "string", "app_name", "预览版"
+            //混淆
+            minifyEnabled false
+            shrinkResources false
+            debuggable true
+
+            //前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明，后一个文件是自己的定义混淆文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard-x5.cfg'
+            signingConfig signingConfigs.releaseConfig
+//            applicationIdSuffix '.preview'
+        }
+    }
+
+
+    flavorDimensions "product"
+
+    productFlavors {
+        // 测试
+        my_test {
+            applicationId "com.example.chenjiayou.myapplication"
+            versionCode 230
+            versionName 'v1.01'
+            dimension 'product'
+        }
+        // 正式
+        my_product {
+            applicationId "com.example.chenjiayou.myapplication"
+            versionCode 1
+            versionName 'v1.01'
+            dimension 'product'
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def outputFile = output.outputFile
+            if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                def fileName
+//                fileName = "${variant.flavorName}_${variant.buildType.name}_${releaseTime()}_${variant.versionName}.apk"
+                fileName = "app" + "${variant.buildType.name}_${variant.versionName}.apk"
+                output.outputFileName = fileName
+            }
+        }
+    }
+
+    // 使用JavaJDK1.8版本
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+static def releaseTime() {
+    def format = new Date().format("yyyy-MM-dd")
+    return format
 }
 
 dependencies {
