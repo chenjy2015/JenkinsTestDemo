@@ -39,7 +39,7 @@ android {
 
 
     signingConfigs {
-        debugConfig {
+        debugConfig { 
             keyAlias DEBUG_KEY_ALIAS
             keyPassword DEBUG_KEY_PASSWROD
             storeFile file(DEBUG_STORE_FILE)
