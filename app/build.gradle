@@ -1,11 +1,9 @@
 apply plugin: 'com.android.application'
 
 //接收Jenkins传递过来的参数
-ext.version_name = System.getProperty("VERSION_CODE") != null ?
-        System.getProperty("VERSION_NAME") : 'v1.0'
-//
-ext.version_code = System.getProperty("VERSION_CODE") != null ?
-        System.getProperty("VERSION_NAME") : 1
+def version_name = System.getProperties().get("VERSION_NAME", "v1.0")
+
+def version_code = System.getProperties().get("VERSION_CODE", 1)
 
 
 android {
@@ -153,15 +151,15 @@ android {
         // 测试
         my_test {
             applicationId "com.example.chenjiayou.myapplication"
-            versionCode System.getProperty("VERSION_CODE")
-            versionName System.getProperty("VERSION_NAME")
+            versionCode version_code
+            versionName version_name
             dimension 'product'
         }
         // 正式
         my_product {
             applicationId "com.example.chenjiayou.myapplication"
-            versionCode System.getProperty("VERSION_CODE")
-            versionName System.getProperty("VERSION_NAME")
+            versionCode version_code
+            versionName version_name
             dimension 'product'
         }
     }
