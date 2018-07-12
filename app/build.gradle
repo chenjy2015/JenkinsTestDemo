@@ -4,7 +4,7 @@ apply plugin: 'com.android.application'
 ext.version_name = project.hasProperty("version_name") ?
         project.getProperty("version_name") : 'v1.0'
 
-ext.version_code = System.hasProperty("version_code") ?
+ext.version_code = project.hasProperty("version_code") ?
         project.getProperty("version_code") : 1
 
 
