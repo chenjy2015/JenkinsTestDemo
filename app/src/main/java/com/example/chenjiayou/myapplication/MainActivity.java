@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mInforTv = findViewById(R.id.infor);
-        mInforTv.setText(new BuildInfor().getVersionName(this));
+        mInforTv.setText("version:" + new BuildInfor().getVersionName(this) + "\r\n code: " + new
+                BuildInfor().getVersionCode(this));
     }
 }
