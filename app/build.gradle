@@ -1,13 +1,11 @@
 apply plugin: 'com.android.application'
 
-ext.systemProperties = System.properties
-
 //接收Jenkins传递过来的参数
-ext.version_name = System.getProperty("version_name") != null ?
-        System.getProperty("version_name") : 'v1.0'
-
-ext.version_code = System.getProperty("version_code") != null ?
-        System.getProperty("version_code") : 1
+ext.version_name = System.getProperty("VERSION_CODE") != null ?
+        System.getProperty("VERSION_NAME") : 'v1.0'
+//
+ext.version_code = System.getProperty("VERSION_CODE") != null ?
+        System.getProperty("VERSION_NAME") : 1
 
 
 android {
@@ -174,7 +172,7 @@ android {
             if (outputFile != null && outputFile.name.endsWith('.apk')) {
                 def fileName
 //                fileName = "${variant.flavorName}_${variant.buildType.name}_${releaseTime()}_${variant.versionName}.apk"
-                fileName = "app-" + "${variant.buildType.name}_${version_name}.apk"
+                fileName = "app-" + "${variant.buildType.name}_${variant.versionName}.apk"
                 output.outputFileName = fileName
             }
         }
