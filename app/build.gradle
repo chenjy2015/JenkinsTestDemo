@@ -3,10 +3,10 @@ apply plugin: 'com.android.application'
 ext.systemProperties = System.properties
 
 //接收Jenkins传递过来的参数
-ext.version_name = System.getProperty("version_name") == null ?
+ext.version_name = System.getProperty("version_name") != null ?
         System.getProperty("version_name") : 'v1.0'
 
-ext.version_code = System.getProperty("version_code") == null ?
+ext.version_code = System.getProperty("version_code") != null ?
         System.getProperty("version_code") : 1
 
 
