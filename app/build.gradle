@@ -172,7 +172,7 @@ android {
             if (outputFile != null && outputFile.name.endsWith('.apk')) {
                 def fileName
 //                fileName = "${variant.flavorName}_${variant.buildType.name}_${releaseTime()}_${variant.versionName}.apk"
-                fileName = "app-" + "${variant.buildType.name}_${variant.versionName}.apk"
+                fileName = "app-" + "${variant.buildType.name}_${version_name}.apk"
                 output.outputFileName = fileName
             }
         }
