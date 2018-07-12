@@ -1,9 +1,9 @@
 apply plugin: 'com.android.application'
 
 //接收Jenkins传递过来的参数
-def version_name = System.getProperties().get("VERSION_NAME", "v1.0")
+def version_name = System.getProperties().get('VERSION_NAME', 'v1.0')
 
-def version_code = System.getProperties().get("VERSION_CODE", 1)
+def version_code = System.getProperties().get('VERSION_CODE', 1)
 
 
 android {
