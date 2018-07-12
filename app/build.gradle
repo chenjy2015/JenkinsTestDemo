@@ -153,15 +153,15 @@ android {
         // 测试
         my_test {
             applicationId "com.example.chenjiayou.myapplication"
-            versionCode version_code
-            versionName version_name
+            versionCode System.getProperty("VERSION_CODE")
+            versionName System.getProperty("VERSION_NAME")
             dimension 'product'
         }
         // 正式
         my_product {
             applicationId "com.example.chenjiayou.myapplication"
-            versionCode version_code
-            versionName version_name
+            versionCode System.getProperty("VERSION_CODE")
+            versionName System.getProperty("VERSION_NAME")
             dimension 'product'
         }
     }
