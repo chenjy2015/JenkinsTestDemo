@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 
-ext.version_name = project.hasProperty("version_name") ?
-        project.getProperties().get("version_name") : 'v1.0'
+ext.version_name = System.hasProperty("version_name") ?
+        System.getProperties().get("version_name") : 'v1.0'
 
-ext.version_code = project.hasProperty("version_code") ?
-        project.getProperties().get("version_code") : 1
+ext.version_code = System.hasProperty("version_code") ?
+        System.getProperties().get("version_code") : 1
 
 
 android {
@@ -60,6 +60,7 @@ android {
             storePassword RELEASE_STORE_PASSWORD
         }
     }
+
 
     buildTypes {
         // 调试环境（测试环境服务器，不带混淆，可打印日志）
