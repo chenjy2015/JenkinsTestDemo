@@ -1,5 +1,13 @@
 apply plugin: 'com.android.application'
 
+
+ext.version_name = project.hasProperty("version_name") ?
+        project.getProperties().get("version_name") : 'v1.0'
+
+ext.version_code = project.hasProperty("version_code") ?
+        project.getProperties().get("version_code") : 1
+
+
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -144,15 +152,15 @@ android {
         // 测试
         my_test {
             applicationId "com.example.chenjiayou.myapplication"
-            versionCode 230
-            versionName 'v1.01'
+            versionCode version_code
+            versionName version_name
             dimension 'product'
         }
         // 正式
         my_product {
             applicationId "com.example.chenjiayou.myapplication"
-            versionCode 1
-            versionName 'v1.01'
+            versionCode version_code
+            versionName version_name
             dimension 'product'
         }
     }
@@ -176,6 +184,7 @@ android {
     }
 
 }
+
 
 static def releaseTime() {
     def format = new Date().format("yyyy-MM-dd")
