@@ -1,11 +1,13 @@
 apply plugin: 'com.android.application'
 
-//接收Jenkins传递过来的参数
-ext.version_name = project.hasProperty("version_name") ?
-        project.getProperty("version_name") : 'v1.0'
+ext.systemProperties = System.properties
 
-ext.version_code = project.hasProperty("version_code") ?
-        project.getProperty("version_code") : 1
+//接收Jenkins传递过来的参数
+ext.version_name = System.getProperty("version_name") == null ?
+        System.getProperty("version_name") : 'v1.0'
+
+ext.version_code = System.getProperty("version_code") == null ?
+        System.getProperty("version_code") : 1
 
 
 android {
