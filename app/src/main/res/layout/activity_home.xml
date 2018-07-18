@@ -9,24 +9,33 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:padding="15dp"
-        tools:context="com.example.chenjiayou.myapplication.MainActivity"
+        tools:context="com.example.chenjiayou.myapplication.HomeActivity"
         >
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/infor"
+            android:hint="车名"
+            android:id="@+id/car_name"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
             android:layout_width="wrap_content"
-            android:text="The Jenkins test"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:hint="请输入车名"
+            android:id="@+id/edit_car_name"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             />
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/launcher"
+            android:id="@+id/change"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/launcher_new_android_frame_desgin"
+            android:layout_width="match_parent"
+            android:text="change"
             />
 
     </android.support.v7.widget.LinearLayoutCompat>
 
 </layout>
-
