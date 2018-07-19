@@ -12,19 +12,35 @@
         tools:context="com.example.chenjiayou.myapplication.MainActivity"
         >
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/infor"
+        <android.support.v7.widget.AppCompatEditText
+            android:hint="请输入汽车品牌"
+            android:id="@+id/car_brand"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="The Jenkins test"
+            android:layout_width="match_parent"
+            />
+
+        <android.support.v7.widget.AppCompatEditText
+            android:hint="请输入汽车型号"
+            android:id="@+id/car_type"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
             />
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/launcher"
+            android:background="@color/colorPrimary"
+            android:id="@+id/save"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/launcher_new_android_frame_desgin"
+            android:layout_width="match_parent"
+            android:text="保存"
+            android:textColor="@android:color/white"
             />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyler_view"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            />
+
 
     </android.support.v7.widget.LinearLayoutCompat>
 

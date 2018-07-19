@@ -17,6 +17,13 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true   // 解决Dex超出方法数的限制问题
+
+        //指定room.schemaLocation生成的文件路径
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     buildTypes {
@@ -63,14 +70,6 @@ android {
     buildTypes {
         // 调试环境（测试环境服务器，不带混淆，可打印日志）
         debug {
-//            manifestPlaceholders = [BAIDU_KEY_VALUE: "BDkrlSp5O2F56GRU8G3t5ZAA1De2VGte",
-//                                    JPUSH_APPKEY   : "c9634d1970593188a67b1e77",
-//                                    JPUSH_PKGNAME  : "com.oxbix.spanlogistics.debug",
-//                                    JPUSH_CHANNEL  : "developer-default" //暂时填写默认值即可.]
-//            ]
-//            buildConfigField "boolean", "isDebug", "true"
-//            resValue "string", "app_name", "测试版"
-            //混淆
             minifyEnabled false
             shrinkResources false
             debuggable true
@@ -83,15 +82,6 @@ android {
 
         // 发布环境（线上环境服务器，带混淆，不可打印日志）
         release {
-//            manifestPlaceholders = [BAIDU_KEY_VALUE: "jQR7Yr7COOAKqs3T2GudKeHW1UzgYbqg",
-//                                    JPUSH_APPKEY   : "7db3190162817c50f34df055",
-//                                    JPUSH_PKGNAME  : "com.oxbix.spanlogistics",
-//                                    JPUSH_CHANNEL  : "developer-default" //暂时填写默认值即可.]
-//            ]
-//            buildConfigField "boolean", "isDebug", "false"
-//            resValue "string", "app_name", "正式版"
-
-            //混淆
             minifyEnabled true
             shrinkResources true
 
@@ -103,14 +93,6 @@ android {
         // 测试环境（测试支付专用）
         dev {
             matchingFallbacks = ['dev', 'preview', 'debug', 'release']
-//            manifestPlaceholders = [BAIDU_KEY_VALUE: "jQR7Yr7COOAKqs3T2GudKeHW1UzgYbqg",
-//                                    JPUSH_APPKEY   : "7db3190162817c50f34df055",
-//                                    JPUSH_PKGNAME  : "com.oxbix.spanlogistics",
-//                                    JPUSH_CHANNEL  : "developer-default" //暂时填写默认值即可.]
-//            ]
-//            buildConfigField "boolean", "isDebug", "true"
-//            resValue "string", "app_name", "开发版"
-            //混淆
             minifyEnabled true
             shrinkResources true
             debuggable true
@@ -124,15 +106,6 @@ android {
         previewDev {
             //关键代码，release， debug为library中已有buildType
             matchingFallbacks = ['preview', 'debug', 'release']
-//
-//            manifestPlaceholders = [BAIDU_KEY_VALUE: "jQR7Yr7COOAKqs3T2GudKeHW1UzgYbqg",
-//                                    JPUSH_APPKEY   : "7db3190162817c50f34df055",
-//                                    JPUSH_PKGNAME  : "com.oxbix.spanlogistics",
-//                                    JPUSH_CHANNEL  : "developer-default" //暂时填写默认值即可.]
-//            ]
-//            buildConfigField "boolean", "isDebug", "true"
-//            resValue "string", "app_name", "预览版"
-            //混淆
             minifyEnabled false
             shrinkResources false
             debuggable true
@@ -140,7 +113,6 @@ android {
             //前一部分代表系统默认的android程序的混淆文件，该文件已经包含了基本的混淆声明，后一个文件是自己的定义混淆文件
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro', 'proguard-x5.cfg'
             signingConfig signingConfigs.releaseConfig
-//            applicationIdSuffix '.preview'
         }
     }
 
@@ -169,7 +141,6 @@ android {
             def outputFile = output.outputFile
             if (outputFile != null && outputFile.name.endsWith('.apk')) {
                 def fileName
-//                fileName = "${variant.flavorName}_${variant.buildType.name}_${releaseTime()}_${variant.versionName}.apk"
                 fileName = "app-" + "${variant.buildType.name}_${variant.versionName}.apk"
                 output.outputFileName = fileName
             }
@@ -184,12 +155,6 @@ android {
 
 }
 
-
-static def releaseTime() {
-    def format = new Date().format("yyyy-MM-dd")
-    return format
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'com.android.support:appcompat-v7:26.1.0'
@@ -200,8 +165,13 @@ dependencies {
 
     implementation project(':style')
 
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+
+    implementation 'com.android.support:cardview-v7:26.1.0'
+
     // --------------------------  lifecycle  --------------------------
     def lifecycle_version = "1.1.1"
+    def roomVersion = '1.0.0'
 
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
@@ -222,6 +192,11 @@ dependencies {
 
     // optional - Test helpers for LiveData
     testImplementation "android.arch.core:core-testing:$lifecycle_version"
+
+    // Room components
+    implementation "android.arch.persistence.room:runtime:$roomVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
+    androidTestImplementation "android.arch.persistence.room:testing:$roomVersion"
 
     // ----------------------------- RxJava/RxAndroid（综合库）-----------------------------
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'

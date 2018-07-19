@@ -30,10 +30,10 @@
             />
 
         <android.support.v7.widget.AppCompatButton
-            android:id="@+id/change"
+            android:id="@+id/add"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:text="change"
+            android:text="save"
             />
 
     </android.support.v7.widget.LinearLayoutCompat>
