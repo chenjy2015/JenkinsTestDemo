@@ -1,32 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
 
-    <data/>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    >
 
-    <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <Button
+        android:id="@+id/launcher"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:text="set data"
+        />
+
+    <android.support.v7.widget.RecyclerView
+        android:background="@android:color/darker_gray"
+        android:id="@+id/recyclerview"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:padding="15dp"
-        tools:context="com.example.chenjiayou.myapplication.MainActivity"
-        >
+        />
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/infor"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="The Jenkins test"
-            />
-
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/launcher"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/launcher_new_android_frame_desgin"
-            />
-
-    </android.support.v7.widget.LinearLayoutCompat>
-
-</layout>
-
+</LinearLayout>

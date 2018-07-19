@@ -25,3 +25,9 @@ allprojects {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+ext {
+    roomVersion = '1.0.0'
+    archLifecycleVersion = '1.1.0'
+    support_library_version = '26.1.0' // 统一兼容库版本
+}
