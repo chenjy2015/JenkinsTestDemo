@@ -28,7 +28,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
 /**
- * Routing   
+ * Routing
  * Desc    TODO
  * Source
  * Created by chenjiayou on 2018/7/20 10:37
@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         mCarViewModel.getLiveData().observe(this, new Observer<List<Car>>() {
 
             @Override
-            public void onChanged(
+            public void onChanged( 
                     @Nullable List<Car> cars) {
 
                 mCarAdapter.setCars(cars);
