@@ -43,7 +43,8 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.ViewHolder> {
             holder.mTVCarBrand.setText("no brand");
             holder.mTVCarType.setText("no type");
         } else {
-            holder.mTVCarBrand.setText(mCars.get(position).getBrand());
+            holder.mTVCarBrand
+                    .setText(mCars.get(position).getBrand() + mCars.get(position).getId());
             holder.mTVCarType.setText(mCars.get(position).getType());
         }
     }

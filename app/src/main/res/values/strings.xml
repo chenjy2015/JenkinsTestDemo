@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">My Application</string>
+
+    <string-array name="brands">
+        <item>吉利</item>
+        <item>长城</item>
+        <item>长安</item>
+        <item>比亚迪</item>
+        <item>奇瑞</item>
+        <item>众泰</item>
+    </string-array>
+
+    <string-array name="brands_type">
+        <item>紧凑型SUV</item>
+        <item>中大型SUV</item>
+        <item>紧凑型轿车</item>
+        <item>中大型轿车</item>
+    </string-array>
+
+
 </resources>

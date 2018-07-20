@@ -1,6 +1,7 @@
 package com.example.chenjiayou.myapplication;
 
 import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
@@ -25,8 +26,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.BiFunction;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.schedulers.Schedulers;
 
+/**
+ * Routing   
+ * Desc    TODO
+ * Source
+ * Created by chenjiayou on 2018/7/20 10:37
+ * Version 1.0
+ */
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding                mBinding;
@@ -61,7 +68,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(int position) {
 
-                mCarViewModel.clear();
+                //实验证明 删除对象是根据ID来做判断
+                LiveData<List<Car>> listLiveData = mCarViewModel.getLiveData();
+                Car c = listLiveData.getValue().get(position);
+                Car car = new Car("","");
+                car.setId(c.getId());
+                mCarViewModel.delete(car);
             }
         });
 

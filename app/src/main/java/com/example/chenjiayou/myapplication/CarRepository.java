@@ -57,7 +57,7 @@ public class CarRepository {
                   });
     }
 
-    public void delete() {
+    public void delete(Car car) {
 
         Observable.just("")
                   .compose(new DebounceObservableTransformer<>())
@@ -67,7 +67,7 @@ public class CarRepository {
                       @Override
                       public Object apply(Object object) throws Exception {
 
-                          mCarDao.delete();
+                          mCarDao.delete(car);
                           return object;
                       }
                   })

@@ -2,6 +2,7 @@ package com.example.chenjiayou.myapplication;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 
@@ -17,8 +18,8 @@ public interface CarDao {
     @Insert
     void insert(Car car);
 
-    @Query ("DELETE FROM car_table")
-    void delete();
+    @Delete
+    void delete(Car car);
 
     @Query ("SELECT * from car_table ORDER BY id ASC")
     LiveData<List<Car>> getCars();
